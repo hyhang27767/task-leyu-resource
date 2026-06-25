@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>leyu · 资料整理与延伸阅读</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', 'Helvetica Neue', sans-serif;
+            background: #f4f9fa;
+            color: #1d2c2f;
+            line-height: 1.6;
+            padding: 0 1rem 3rem;
+        }
+        .page {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        /* 首页横幅 (hero) */
+        .hero {
+            background: linear-gradient(145deg, #1f5c5a 0%, #2b7a78 70%, #3e9a93 100%);
+            color: #f0fffe;
+            padding: 3rem 2rem 2.5rem;
+            border-radius: 0 0 36px 36px;
+            margin: 0 -1rem 2.5rem;
+            box-shadow: 0 10px 24px rgba(30, 80, 75, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "‖ ley";
+            font-size: 10rem;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.04);
+            position: absolute;
+            right: -1rem;
+            bottom: -2.5rem;
+            letter-spacing: -0.05em;
+            pointer-events: none;
+            user-select: none;
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            margin-bottom: 0.5rem;
+        }
+        .hero .sub {
+            font-size: 1rem;
+            opacity: 0.85;
+            max-width: 600px;
+            border-left: 3px solid #a2ddd6;
+            padding-left: 1rem;
+        }
+        /* 背景说明区 */
+        .context-card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 1.8rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 12px rgba(35, 90, 80, 0.06);
+            border: 1px solid #d5eae8;
+            position: relative;
+        }
+        .context-card::before {
+            content: "📋 背景";
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: #2a7e7a;
+            background: #dff2ef;
+            padding: 0.1rem 0.9rem;
+            border-radius: 30px;
+            display: inline-block;
+            margin-bottom: 0.8rem;
+        }
+        .context-card p {
+            margin-bottom: 0.8rem;
+        }
+        .context-card p:last-child {
+            margin-bottom: 0;
+        }
+        /* 网格卡片 (三段自然介绍) */
+        .grid-three {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.4rem;
+            margin: 2rem 0 2.2rem;
+        }
+        .grid-card {
+            background: white;
+            border-radius: 20px;
+            padding: 1.8rem 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+            border: 1px solid #dcebe9;
+            transition: box-shadow 0.2s, transform 0.15s;
+        }
+        .grid-card:hover {
+            box-shadow: 0 8px 18px rgba(45, 110, 100, 0.08);
+            transform: translateY(-2px);
+        }
+        .grid-card .card-label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #468a84;
+            background: #e3f4f0;
+            display: inline-block;
+            padding: 0.15rem 0.8rem;
+            border-radius: 30px;
+            margin-bottom: 0.9rem;
+        }
+        .grid-card h3 {
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin-bottom: 0.6rem;
+            color: #1d4a47;
+        }
+        .grid-card p {
+            font-size: 0.95rem;
+            color: #2d4440;
+        }
+        .grid-card p + p {
+            margin-top: 0.7rem;
+        }
+        .highlight-link {
+            color: #1d6f6b;
+            font-weight: 500;
+            text-decoration: none;
+            border-bottom: 1px dashed #77b7b0;
+            transition: border-color 0.2s;
+        }
+        .highlight-link:hover {
+            border-bottom: 1px solid #1d6f6b;
+        }
+        /* 页尾访问提示区域 */
+        .footer-access {
+            margin: 1.5rem 0 0;
+            background: #eaf5f2;
+            border-radius: 30px;
+            padding: 2rem 1.8rem;
+            text-align: center;
+            border: 1px solid #bedad4;
+        }
+        .footer-access .inner {
+            max-width: 640px;
+            margin: 0 auto;
+        }
+        .footer-access p {
+            font-size: 1rem;
+            color: #1d4340;
+            margin-bottom: 0.6rem;
+        }
+        .footer-access .note {
+            font-size: 0.9rem;
+            color: #3f6b65;
+            background: #ffffffbd;
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            display: inline-block;
+            backdrop-filter: blur(2px);
+        }
+        /* 响应式：平板及以上 */
+        @media (min-width: 640px) {
+            body {
+                padding: 0 2rem 3.5rem;
+            }
+            .hero {
+                margin: 0 -2rem 2.8rem;
+                padding: 4rem 3rem 3rem;
+                border-radius: 0 0 48px 48px;
+            }
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            .grid-three {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1.6rem;
+            }
+            .context-card {
+                padding: 2rem 2.4rem;
+            }
+            .footer-access {
+                padding: 2.5rem 2rem;
+                border-radius: 48px;
+            }
+        }
+        @media (min-width: 1024px) {
+            .hero {
+                padding: 5rem 4rem 3.5rem;
+            }
+            .hero h1 {
+                font-size: 3.2rem;
+            }
+            .grid-card {
+                padding: 2.2rem 1.8rem;
+            }
+        }
+        /* 小细节 */
+        .accent-dot {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background: #41948d;
+            border-radius: 12px;
+            margin: 0 6px 0 2px;
+            opacity: 0.5;
+        }
+        hr {
+            border: none;
+            height: 1px;
+            background: linear-gradient(to right, #bcd9d4, transparent);
+            margin: 0.5rem 0 1.5rem;
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+    <!-- 首页横幅 hero -->
+    <header class="hero">
+        <h1>leyu · 日常查询与延伸</h1>
+        <div class="sub">对照、翻阅、整理 —— 一页清晰的信息入口</div>
+    </header>
+
+    <!-- 背景说明 -->
+    <section class="context-card">
+        <p>
+            在获取信息的过程中，我们常常需要同时进行<strong>查阅</strong>、<strong>对照</strong>和<strong>延伸阅读</strong>。
+            无论是核实一个术语，还是梳理某个话题的脉络，一个干净、可追溯的资料页都能节省不少时间。
+            <a href="https://task-leyu.com.cn" class="highlight-link">leyu</a> 正是基于这样的日常需求而存在：
+            它不追求大而全的堆砌，而是尝试把分散的参考内容整理成可反复使用的结构。
+        </p>
+        <p>
+            这个页面本身也是一个轻量的尝试——在浏览与检索之间保持平衡。
+            下面三个卡片分别对应日常最常用的三种场景，你可以从中找到自己需要的起点。
+        </p>
+    </section>
+
+    <!-- 三段自然介绍 (网格卡片) -->
+    <section class="grid-three">
+        <article class="grid-card">
+            <span class="card-label">① 快速对照</span>
+            <h3>并排查看关键信息</h3>
+            <p>
+                当需要在不同来源之间反复比对时，清晰的条目结构比长篇叙述更有用。
+                <a href="https://task-leyu.com.cn" class="highlight-link">leyu</a> 的卡片布局支持将定义、示例、时间线等内容并置，
+                减少页面跳转带来的注意力损耗。
+            </p>
+            <p>
+                你可以在同一视点下比较概念差异，或直接引用整理好的摘要。
+            </p>
+        </article>
+
+        <article class="grid-card">
+            <span class="card-label">② 延伸路径</span>
+            <h3>从一条线索出发</h3>
+            <p>
+                很多时候我们只记得某个模糊的关键词，却需要关联到更完整的上下文。
+                通过索引式的链接与标签，<a href="https://task-leyu.com.cn" class="highlight-link">leyu</a> 
+                能帮助你找到相邻话题、原始出处以及不同角度的评注。
+            </p>
+            <p>
+                不必从头开始，从感兴趣的节点向外延伸往往更有效率。
+            </p>
+        </article>
+
+        <article class="grid-card">
+            <span class="card-label">③ 阅读整理</span>
+            <h3>轻量级资料笔记</h3>
+            <p>
+                无论是摘录、短评还是临时记录，一个简洁的页面也能充当临时的知识草稿。
+                <a href="https://task-leyu.com.cn" class="highlight-link">leyu</a> 的版式侧重可读性与留白，
+                方便你在浏览过程中随时把想法附着在对应的段落旁边。
+            </p>
+            <p>
+                不需要复杂的工具，页面本身就是整理的一部分。
+            </p>
+        </article>
+    </section>
+
+    <!-- 额外补充：FAQ 摘要式说明 (更轻松) -->
+    <div style="margin: 1rem 0 1.8rem;">
+        <details style="background: #f0f9f6; border-radius: 20px; padding: 0.8rem 1.5rem; border: 1px solid #c7dfda;">
+            <summary style="cursor: pointer; font-weight: 500; color: #1b5550; padding: 0.3rem 0;">
+                ▸ 一些常见疑问 · 简短摘要
+            </summary>
+            <div style="padding: 0.8rem 0 0.2rem; color: #2b524e; font-size: 0.95rem;">
+                <p><strong>Q：</strong>这个页面适合第一次接触的人吗？<br>
+                <strong>A：</strong>是的。内容以日常查询和对照为出发点，不需要事先了解特定背景。</p>
+                <p style="margin-top: 0.5rem;"><strong>Q：</strong>资料会定期调整吗？<br>
+                <strong>A：</strong>页面结构会基于使用反馈逐步优化，但保持克制与清晰是基本原则。</p>
+                <p style="margin-top: 0.5rem;"><strong>Q：</strong>有没有更具体的索引分类？<br>
+                <strong>A：</strong>你可以直接前往 <a href="https://task-leyu.com.cn" class="highlight-link">leyu</a> 浏览当前可用的分类入口。</p>
+            </div>
+        </details>
+    </div>
+
+    <!-- 页尾访问提示 -->
+    <footer class="footer-access">
+        <div class="inner">
+            <p>如果你正在寻找一个可以反复使用的参考页，<br class="mobile-break">
+              不妨从 <a href="https://task-leyu.com.cn" class="highlight-link">leyu</a> 开始。</p>
+            <p style="font-size: 0.92rem; color: #31635e; margin-top: 0.2rem;">
+                页面专注于查询、对照与延伸，不预设结论。
+            </p>
+            <div class="note">
+                <span class="accent-dot"></span> 基于网格卡片 · 蓝绿色调
+            </div>
+            <p style="margin-top: 1.2rem; font-size: 0.8rem; color: #4f7a74; opacity: 0.7; border-top: 1px solid #b9d4ce; padding-top: 1rem;">
+                <span style="letter-spacing: 0.4px;">task-leyu.com.cn</span> · 日常资料整理
+            </p>
+        </div>
+    </footer>
+</div>
+</body>
+</html>
